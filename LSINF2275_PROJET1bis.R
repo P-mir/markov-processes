@@ -290,6 +290,9 @@ for (i in 1 : 10000){
         position <- handle_three(dice)
         
       }
+      else if (position == 10 && dice == 1){
+        position <- 15
+      }
       else {
         position <- position + dice
       }
@@ -301,20 +304,20 @@ for (i in 1 : 10000){
       if(position == 3){
         position <- handle_three(dice)
         
-      } else if(position == 7 && activate_trap()){
-        position = 4
-        
-      } else if(position == 13 && activate_trap()){
-        position = 1
+      }
+      else if (position == 9 && dice == 2 ){
+        position <- 15
+      }
+      else if (position == 10 && dice >0){
+        position <-15 +(dice-1)
+      }
       
-      } else {
+      else {
         position <- position + dice
   
-        
         if( position == 7 && activate_trap()){
           
           position = 4
-          
         }
         else if (position == 13 && activate_trap()){
           position = 1
@@ -329,27 +332,25 @@ for (i in 1 : 10000){
         position <- handle_three(dice)
       }
       
-      else if(position == 7){
-        
-        position = 4
+      else if (position == 8 && dice ==3){
+        position == 15
       }
-      
-      else if(position == 13){
-        
-        position =1
+      else if (position == 9 && dice>=2){
+        position = 15 + dice -2
+      }
+      else if (position == 10 && dice >= 1){
+        position = 15 + dice -1
       }
       else {
         
         position <- position + dice
-        
-        
+
         if (position == 7){
           position = 4
           
         }
         if(position ==13){
           position =1
-          
         }
       }
       step = step +1
@@ -416,8 +417,6 @@ for (i in 1 : 10000){
 
 
 
-a
-b
 
 
 
