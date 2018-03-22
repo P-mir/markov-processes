@@ -205,9 +205,7 @@ C <-c(1,1,1,1,1,1,1,1,1,1,1,1,1,1,0)
 # c(20,18,16,14,12,10,8,6,4,1,8,6,4,1,0)
 
 
-
-
-v_iter=function(S,N,R) {
+v_iter=function(S,N,R,C) {
   V<- C
   a<-c(rep(0,15))
   for( t  in 1 : 1000){
@@ -236,10 +234,10 @@ v_iter=function(S,N,R) {
 return(list(a,V))
 }
 
-a <- v_iter(p_secure1,p_normal1,p_risk1)[[1]]
-V <- v_iter(p_secure1,p_normal1,p_risk1)[[2]]
-b <- v_iter(p_secure2,p_normal2,p_risk2)[[1]]
-Vbis <- v_iter(p_secure2,p_normal2,p_risk2)[[2]]
+a <- v_iter(p_secure1,p_normal1,p_risk1,C)[[1]]
+V <- v_iter(p_secure1,p_normal1,p_risk1,C)[[2]]
+b <- v_iter(p_secure2,p_normal2,p_risk2,C)[[1]]
+Vbis <- v_iter(p_secure2,p_normal2,p_risk2,C)[[2]]
 
 #----- Algorithme pour la règle 2 ("circle game") -------------
 
@@ -331,7 +329,7 @@ for (i in 1 : 10000){
         position <- handle_three(dice)
       }
       
-      if(position == 7){
+      else if(position == 7){
         
         position = 4
       }
@@ -346,7 +344,7 @@ for (i in 1 : 10000){
         
         
         if (position == 7){
-          position == 4
+          position = 4
           
         }
         if(position ==13){
