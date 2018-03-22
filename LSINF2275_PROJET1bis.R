@@ -1,5 +1,5 @@
 #---------------CREATION DES FONCTIONS-------------------------------
-#test
+
 matpowert<-function(a,t){
   p<-a
   for (i in 1 : t){
@@ -208,13 +208,14 @@ C <-c(1,1,1,1,1,1,1,1,1,1,1,1,1,1,0)
 V<- C
 a<-c(rep(0,15))
 
+v_iter=function(Secure,Normal,Risk) {
 for( t  in 1 : 1000){
   for (i in 1 : 15 ){
-    secure <- C[i]+p_secure1[i,]%*%V
-    normal <- C[i]+p_normal1[i,]%*%V
-    risk   <- C[i]+p_risk1[i,]%*%V
+    secure <- C[i]+Secure[i,]%*%V
+    normal <- C[i]+Normal[i,]%*%V
+    risk   <- C[i]+Risk[i,]%*%V
 
-    V[i] <- max(secure,normal,risk)
+    V[i] <- min(secure,normal,risk)
     
     if(secure < normal & secure < risk){
       a[i]=1
@@ -227,38 +228,19 @@ for( t  in 1 : 1000){
     }
     else {
       a[i]=3
-      
+    
     }
   }
 }
+return(list(a,V))
+}
+
+a <- v_iter(p_secure1,p_normal1,p_risk1)[[1]]
+V <- v_iter(p_secure1,p_normal1,p_risk1)[[2]]
+b <- v_iter(p_secure2,p_normal2,p_risk2)[[1]]
+Vbis <- v_iter(p_secure2,p_normal2,p_risk2)[[2]]
+
 #----- Algorithme pour la règle 2 ("circle game") -------------
-
-V<- C
-b<-c(rep(0,15))
-
-for ( t in 1 : 100){
-  
-  for (i in c(seq(15,1,-1))){
-    secure <- C[i]+p_secure2[i,]%*%V
-    normal <- C[i]+p_normal2[i,]%*%V
-    risk   <- C[i]+p_risk2[i,]%*%V
-    
-    V[i] <- max(secure,normal,risk)
-    
-    if(secure < normal & secure < risk){
-      b[i]=1
-      
-    }
-    else if (normal < secure & normal < risk) {
-      b[i]=2
-      
-    }
-    else {
-      b[i]=3
-      
-    }
-  }
-}
 
 ## ------------ Use of dice 1,2,3 only -----------------
 
@@ -393,8 +375,10 @@ for (i in 1 : 10000){
     if (Rule ==1){
       
       if (j == 1) {
-        cat("Value Iteration: nombre de coups moyen avec la règle 1: ",mean(vector_step),"\n\n")
-      }
+        cat("Value Iteration: nombre de coups moyen avec la règle 1: ",mean(vector_step),"\n")
+        cat("Stratégie: ",a,"\n Total expected cost depuis la case 1: ",V[1],"\n\n") 
+        
+        }
       
       else if (j == 2) {
         cat('Nombre de coups moyen en utilisant seulement le dé "secure", avec la règle 1: ',mean(vector_step),"\n")
@@ -410,7 +394,8 @@ for (i in 1 : 10000){
     if (Rule ==2){
       
       if (j == 1) {
-        cat("Value Iteration: nombre de coups moyen avec la règle 2: ",mean(vector_step),"\n\n")
+        cat("Value Iteration: nombre de coups moyen avec la règle 2: ",mean(vector_step),"\n")
+        cat("Stratégie: ",b,"\n Total expected cost depuis la case 1: ",Vbis[1],"\n\n")
       }
       
       else if (j == 2) {
@@ -421,7 +406,8 @@ for (i in 1 : 10000){
       }    
       else if (j == 4) {
         cat('Nombre de coups moyen en utilisant seulement le dé "risky", avec la règle 2: ',mean(vector_step),"\n")
-      }
+              
+        }
     }
      }
     }
