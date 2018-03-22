@@ -1,5 +1,5 @@
 #---------------CREATION DES FONCTIONS-------------------------------
-#test
+
 matpowert<-function(a,t){
   p<-a
   for (i in 1 : t){
@@ -205,60 +205,43 @@ C <-c(1,1,1,1,1,1,1,1,1,1,1,1,1,1,0)
 # c(20,18,16,14,12,10,8,6,4,1,8,6,4,1,0)
 
 
-V<- C
-a<-c(rep(0,15))
 
-for( t  in 1 : 1000){
-  for (i in 1 : 15 ){
-    secure <- C[i]+p_secure1[i,]%*%V
-    normal <- C[i]+p_normal1[i,]%*%V
-    risk   <- C[i]+p_risk1[i,]%*%V
-    
-    V[i] <- max(secure,normal,risk)
-    
-    if(secure < normal & secure < risk){
-      a[i]=1
-      
-    }
-    else if (normal < secure & normal < risk) {
-      a[i]=2
-      
-      
-    }
-    else {
-      a[i]=3
-      
-    }
-  }
-}
-#----- Algorithme pour la règle 2 ("circle game") -------------
 
-V<- C
-b<-c(rep(0,15))
-
-for ( t in 1 : 100){
+v_iter=function(S,N,R) {
+  V<- C
+  a<-c(rep(0,15))
+  for( t  in 1 : 1000){
+    for (i in 1 : 15 ){
+      secure <- C[i]+S[i,]%*%V
+      normal <- C[i]+N[i,]%*%V
+      risk   <- C[i]+R[i,]%*%V
   
-  for (i in c(seq(15,1,-1))){
-    secure <- C[i]+p_secure2[i,]%*%V
-    normal <- C[i]+p_normal2[i,]%*%V
-    risk   <- C[i]+p_risk2[i,]%*%V
-    
-    V[i] <- max(secure,normal,risk)
-    
-    if(secure < normal & secure < risk){
-      b[i]=1
+      V[i] <- min(secure,normal,risk)
       
-    }
-    else if (normal < secure & normal < risk) {
-      b[i]=2
-      
-    }
-    else {
-      b[i]=3
+      if(secure < normal & secure < risk){
+        a[i]=1
+        
+      }
+      else if (normal < secure & normal < risk) {
+        a[i]=2
+        
+        
+      }
+      else {
+        a[i]=3
       
     }
   }
 }
+return(list(a,V))
+}
+
+a <- v_iter(p_secure1,p_normal1,p_risk1)[[1]]
+V <- v_iter(p_secure1,p_normal1,p_risk1)[[2]]
+b <- v_iter(p_secure2,p_normal2,p_risk2)[[1]]
+Vbis <- v_iter(p_secure2,p_normal2,p_risk2)[[2]]
+
+#----- Algorithme pour la règle 2 ("circle game") -------------
 
 ## ------------ Use of dice 1,2,3 only -----------------
 
@@ -284,117 +267,119 @@ rule2[[4]]=e
 
 for (k in c(1,2)){#circle game ou non 
   Rule = k
-  
+
   for (j in 1:4){
     if (Rule ==1){
-      policy = rule1[[j]]}
-    
+     policy = rule1[[j]]}
+
     if (Rule == 2){
       policy = rule2[[j]]}
-    
+
     vector_step=c()
     
-    for (i in 1 : 10000){
+for (i in 1 : 10000){
+  
+  step = 1
+  position = 1
+  end=FALSE
+  
+  while (end == FALSE) {
+    
+    if (policy[position] == 1) {
+      dice<- roll_dice(1)
       
-      step = 1
-      position = 1
-      end=FALSE
-      
-      while (end == FALSE) {
+      if (position  == 3){
+        position <- handle_three(dice)
         
-        if (policy[position] == 1) {
-          dice <- roll_dice(1)
+      }
+      else {
+        position <- position + dice
+      }
+      step = step +1
+    }
+    else if (policy[position] == 2){
+      dice <- roll_dice(2)
+      
+      if(position == 3){
+        position <- handle_three(dice)
+        
+      } else if(position == 7 && activate_trap()){
+        position = 4
+        
+      } else if(position == 13 && activate_trap()){
+        position = 1
+      
+      } else {
+        position <- position + dice
+  
+        
+        if( position == 7 && activate_trap()){
           
-          if (position  == 3){
-            position <- handle_three(dice)
-            
-          }
-          else {
-            position <- position + dice
-          }
-          step = step +1
+          position = 4
+          
         }
-        else if (policy[position] == 2){
-          dice <- roll_dice(2)
-          
-          if(position == 3){
-            position <- handle_three(dice)
-            
-          } else if(position == 7 && activate_trap()){
-            position = 4
-            
-          } else if(position == 13 && activate_trap()){
-            position = 1
-            
-          } else {
-            position <- position + dice
-            
-            
-            if( position == 7 && activate_trap()){
-              
-              position = 4
-              
-            }
-            else if (position == 13 && activate_trap()){
-              position = 1
-            }
-          }
-          step = step +1
-        }
-        else {
-          dice <- roll_dice(3)
-          
-          if (position == 3){
-            position <- handle_three(dice)
-          }
-          
-          else if(position == 7){
-            
-            position = 4
-          }
-          
-          else if(position == 13){
-            
-            position =1
-          }
-          else {
-            
-            position <- position + dice
-            
-            
-            if (position == 7){
-              position = 4
-              
-            }
-            if(position ==13){
-              position =1
-              
-            }
-          }
-          step = step +1
-        }
-        if (position == 15 ) {
-          end = TRUE
-          vector_step[i] = step
-        }
-        if(position > 15){
-          if (Rule==2){
-            position = position -15 
-          }
-          else if (Rule==1){
-            end = TRUE
-            vector_step[i] = step
-          }
+        else if (position == 13 && activate_trap()){
+          position = 1
         }
       }
-      
+      step = step +1
     }
+    else {
+      dice <- roll_dice(3)
+      
+      if (position == 3){
+        position <- handle_three(dice)
+      }
+      
+      if(position == 7){
+        
+        position = 4
+      }
+      
+      else if(position == 13){
+        
+        position =1
+      }
+      else {
+        
+        position <- position + dice
+        
+        
+        if (position == 7){
+          position == 4
+          
+        }
+        if(position ==13){
+          position =1
+          
+        }
+      }
+      step = step +1
+    }
+    if (position == 15 ) {
+      end = TRUE
+      vector_step[i] = step
+    }
+    if(position > 15){
+      if (Rule==2){
+        position = position -15 
+      }
+      else if (Rule==1){
+        end = TRUE
+        vector_step[i] = step
+      }
+    }
+  }
+  
+}
     
     if (Rule ==1){
       
       if (j == 1) {
-        cat("Value Iteration: nombre de coups moyen avec la règle 1: ",mean(vector_step),"\n\n")
-      }
+        cat("Value Iteration: nombre de coups moyen avec la règle 1: ",mean(vector_step),"\n")
+        cat("Stratégie: ",a,"\n Total expected cost depuis la case 1: ",V[1],"\n\n") 
+        
+        }
       
       else if (j == 2) {
         cat('Nombre de coups moyen en utilisant seulement le dé "secure", avec la règle 1: ',mean(vector_step),"\n")
@@ -405,12 +390,13 @@ for (k in c(1,2)){#circle game ou non
       else if (j == 4) {
         cat('Nombre de coups moyen en utilisant seulement le dé "risky", avec la règle 1: ',mean(vector_step),"\n\n")  }
     }
-    
+   
     
     if (Rule ==2){
       
       if (j == 1) {
-        cat("Value Iteration: nombre de coups moyen avec la règle 2: ",mean(vector_step),"\n\n")
+        cat("Value Iteration: nombre de coups moyen avec la règle 2: ",mean(vector_step),"\n")
+        cat("Stratégie: ",b,"\n Total expected cost depuis la case 1: ",Vbis[1],"\n\n")
       }
       
       else if (j == 2) {
@@ -421,16 +407,19 @@ for (k in c(1,2)){#circle game ou non
       }    
       else if (j == 4) {
         cat('Nombre de coups moyen en utilisant seulement le dé "risky", avec la règle 2: ',mean(vector_step),"\n")
-      }
+              
+        }
     }
-  }
-}
+     }
+    }
 
 
 # ------THEORETICAL EXPECTED COST WITH VALUE ITERATION-----------
 
 
 
+a
+b
 
 
 
