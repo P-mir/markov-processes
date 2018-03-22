@@ -1,5 +1,5 @@
 #---------------CREATION DES FONCTIONS-------------------------------
-
+#test
 matpowert<-function(a,t){
   p<-a
   for (i in 1 : t){
