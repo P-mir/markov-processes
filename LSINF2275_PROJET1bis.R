@@ -303,7 +303,7 @@ for (i in 1 : 10000){
   while (end == FALSE) {
     
     if (policy[position] == 1) {
-      dice<- roll_dice(1)
+      dice <- roll_dice(1)
       
       if (position  == 3){
         position <- handle_three(dice)
@@ -317,7 +317,7 @@ for (i in 1 : 10000){
     else if (policy[position] == 2){
       dice <- roll_dice(2)
       
-      if(position == 3){
+        if(position == 3){
         position <- handle_three(dice)
         
       } else if(position == 7 && activate_trap()){
@@ -348,7 +348,7 @@ for (i in 1 : 10000){
         position <- handle_three(dice)
       }
       
-      if(position == 7){
+      else if(position == 7){
         
         position = 4
       }
@@ -363,7 +363,7 @@ for (i in 1 : 10000){
         
         
         if (position == 7){
-          position == 4
+          position = 4
           
         }
         if(position ==13){
