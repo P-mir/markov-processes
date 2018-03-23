@@ -39,7 +39,7 @@ handle_three <- function(dice){
     newposition <- 3 + dice
   }
   else if (random == 2 && dice > 0){
-    newposition <- 11 + (dice-1)
+    newposition <- 12 + (dice-1)
   }
   else{ 
     newposition = 3
