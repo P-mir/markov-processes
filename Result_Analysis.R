@@ -1,4 +1,3 @@
-
 #File path
 setwd("~/GitHub/markov-processes")
 
@@ -24,11 +23,13 @@ colnames(result_matrix_rule1) <- c("Optimal policy","Dice 1","Dice 2", "Dice 3",
 colnames(result_matrix_rule2) <- c("Optimal policy","Dice 1","Dice 2", "Dice 3", "Random dice")
 
 #---------Simulation des jeux-------------------
+# simulation des jeux pour la règle 1
 for(i in 1 : 5){
   for ( j in 1 : 15){
     result_matrix_rule1[j,i] <- mean(simulation_game(1,policy_list[[i]],j))
   }
 }
+write.table(result_matrix_rule1,"result_matrix_rule1.txt")
 
 # simulation des jeux pour la règle 2
 for(i in 1 : 5){
@@ -36,5 +37,5 @@ for(i in 1 : 5){
     result_matrix_rule1[j,i] <- mean(simulation_game(1,policy_list[[i]],j))
   }
 }
-
+write.table(result_matrix_rule2,"result_matrix_rule2.txt")
 
