@@ -1,0 +1,27 @@
+---
+output: pdf_document
+lang : fr-FR
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(comment = "")
+```
+
+```{r child='LSINF2275-Frontpage.RMD'}
+```
+
+\newpage
+
+'\tableofcontents'
+
+\newpage
+
+```{r,include=F}
+#---------CHARGEMENT DES SCRIPTS---------------------------------------------
+
+```
+
+
+
+
