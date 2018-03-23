@@ -39,7 +39,7 @@ handle_three <- function(dice){
     newposition <- 3 + dice
   }
   else if (random == 2 && dice > 0){
-    newposition <- 11 + (dice-1)
+    newposition <- 12 + (dice-1)
   }
   else{ 
     newposition = 3
@@ -82,8 +82,8 @@ simulation_game<-function(R,S,P) {
         if (position  == 3){
           position <- handle_three(dice)
         }
-        else if (position == 10 && dice == 1){
-          position <- 15
+        else if (position == 11 && dice == 1){
+          position <- 16
         }
         else {
           position <- position + dice
@@ -95,11 +95,17 @@ simulation_game<-function(R,S,P) {
         if(position == 3){
           position <- handle_three(dice)
         }
-        else if (position == 9 && dice == 2 ){
-          position <- 15
+        else if (position == 9 && dice == 2 && activate_trap()==FALSE ){
+          position <- 16
         }
-        else if (position == 10 && dice >0){
-          position <-15 +(dice-1)
+        else if (position == 9 && dice == 1 && activate_trap()==FALSE ){
+          position <- 11
+        }
+        else if (position == 10 && dice == 2){
+          position <- 16
+        }
+        else if (position == 11 && dice >0){
+          position <-16 +(dice-1)
         }
         else {
           position <- position + dice
@@ -119,15 +125,11 @@ simulation_game<-function(R,S,P) {
         if (position == 3){
           position <- handle_three(dice)
         }
-        
-        else if (position == 8 && dice ==3){
-          position == 15
+        else if (position == 10 && dice >= 2){
+          position = 16 + dice -2
         }
-        else if (position == 9 && dice>=2){
-          position = 15 + dice -2
-        }
-        else if (position == 10 && dice >= 1){
-          position = 15 + dice -1
+        else if (position == 11 && dice >= 1){
+          position = 16 + dice -1
         }
         else {
           
@@ -142,13 +144,13 @@ simulation_game<-function(R,S,P) {
         }
         step = step +1
       }
-      if (position == 15 ) {
+      if (position == 16 ) {
         end = TRUE
         vector_step[i] = step
       }
-      if(position > 15){
+      if(position > 16){
         if (rule==2){
-          position = position -15 
+          position = position -16
         }
         else if (rule==1){
           end = TRUE
