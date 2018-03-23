@@ -1,6 +1,4 @@
-#-----------------SIMULATION GAME----------------------------
-
-######Fonctions necessaires
+#-----FONCTIONS NECESSAIRES----------------------------
 
 #matrices de transition d'ordre t
 matpowert<-function(a,t){ 
@@ -63,8 +61,8 @@ activate_trap <- function (position) {
 }
 
 
-#########simulatation du jeu 
-simulation_game<-function(R,S,P) {
+#-----SIMULATION DU JEU AVEC LA PRISON-------------------------
+simulation_game_prison<-function(R,S,P) {
   
   rule<-R
   policy<-S
@@ -158,6 +156,106 @@ simulation_game<-function(R,S,P) {
         }
       }
     }
+  }
+  
+  return(vector_step)
+}
+
+#-----SIMULATION DU JEU SANS LA PRISON-------------------------
+simulation_game<-function(R,S,P) {
+  
+  rule<-R
+  policy<-S
+  start <- P
+  vector_step=c()
+  
+  for (i in 1 : 10000){
+    step = 0
+    position = start
+    end=FALSE
+    
+    while (end == FALSE) {
+      if (policy[position] == 1) {
+        dice<- roll_dice(1)
+        if (position  == 3){
+          position <- handle_three(dice)
+        }
+        else if (position == 10 && dice == 1){
+          position <- 15
+        }
+        else {
+          position <- position + dice
+        }
+        step = step +1
+      }
+      else if (policy[position] == 2){
+        dice <- roll_dice(2)
+        if(position == 3){
+          position <- handle_three(dice)
+        }
+        else if (position == 9 && dice == 2 ){
+          position <- 15
+        }
+        else if (position == 10 && dice >0){
+          position <-15 +(dice-1)
+        }
+        else {
+          position <- position + dice
+          if( position == 7 && activate_trap()){
+            
+            position = 4
+          }
+          else if (position == 13 && activate_trap()){
+            position = 1
+          }
+        }
+        step = step +1
+      }
+      else {
+        dice <- roll_dice(3)
+        
+        if (position == 3){
+          position <- handle_three(dice)
+        }
+        
+        else if (position == 8 && dice ==3){
+          position == 15
+        }
+        else if (position == 9 && dice>=2){
+          position = 15 + dice -2
+        }
+        else if (position == 10 && dice >= 1){
+          position = 15 + dice -1
+        }
+        else {
+          
+          position <- position + dice
+          
+          if (position == 7){
+            position = 4
+            
+          }
+          if(position ==13){
+            position =1
+          }
+        }
+        step = step +1
+      }
+      if (position == 15 ) {
+        end = TRUE
+        vector_step[i] = step
+      }
+      if(position > 15){
+        if (Rule==2){
+          position = position -15 
+        }
+        else if (Rule==1){
+          end = TRUE
+          vector_step[i] = step
+        }
+      }
+    }
+    
   }
   
   return(vector_step)

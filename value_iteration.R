@@ -1,12 +1,13 @@
 #---------------ALGORITHME D'ITERATION DE LA VALEUR------------------------
 # Vecteur coût de depart
-C <-c(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0)
+C <-c(1,1,1,1,1,1,1,1,1,1,1,1,1,1,0)
+C_prison <-c(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0)
 
-v_iter=function(S,N,R,C) {
-  V<- C
-  a<-c(rep(0,16))
+v_iter=function(S,N,R,cost) {
+  V<- cost
+  a<-c(rep(0,length(cost)))
   for( t  in 1 : 1000){
-    for (i in 1 : 16 ){
+    for (i in 1 : length(cost) ){
       secure <- C[i]+S[i,]%*%V
       normal <- C[i]+N[i,]%*%V
       risk   <- C[i]+R[i,]%*%V
