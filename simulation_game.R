@@ -246,10 +246,10 @@ simulation_game<-function(R,S,P) {
         vector_step[i] = step
       }
       if(position > 15){
-        if (Rule==2){
+        if (rule==2){
           position = position -15 
         }
-        else if (Rule==1){
+        else if (rule==1){
           end = TRUE
           vector_step[i] = step
         }
