@@ -160,7 +160,7 @@ simulation_game_prison<-function(R,S,P) {
           if (position == 7){
             position = 4
           }
-          else if(position ==13){
+          else if(position ==14){
             position =1
           }
         }
