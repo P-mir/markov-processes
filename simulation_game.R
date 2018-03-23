@@ -63,7 +63,7 @@ activate_trap <- function (position) {
 }
 
 
-#simulatation du jeu 
+#########simulatation du jeu 
 simulation_game<-function(R,S,P) {
   
   rule<-R

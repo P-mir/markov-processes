@@ -31,7 +31,4 @@ v_iter=function(S,N,R,C) {
   return(list(a,V))
 }
 
-a <- v_iter(p_secure1,p_normal1,p_risk1,C)[[1]]
-V <- v_iter(p_secure1,p_normal1,p_risk1,C)[[2]]
-b <- v_iter(p_secure2,p_normal2,p_risk2,C)[[1]]
-Vbis <- v_iter(p_secure2,p_normal2,p_risk2,C)[[2]]
+
