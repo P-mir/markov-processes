@@ -1,6 +1,7 @@
 #---------------CREATION DES FONCTIONS-------------------------------
 
-matpowert<-function(a,t){
+#matrices de transition d'ordre t
+matpowert<-function(a,t){ 
   p<-a
   for (i in 1 : t){
     p<-p%*%a
@@ -9,11 +10,9 @@ matpowert<-function(a,t){
   return(p)
 }
 
-
+# fonction pour jeter le dé
 roll_dice <- function(typeOfDice){
-  
   dice <- NULL
-  
   if (typeOfDice == 1){
     
     dice <- sample(c(0,1),1)
@@ -22,41 +21,31 @@ roll_dice <- function(typeOfDice){
     
     dice <- sample(c(0,1,2),1)
   }
-  
   else {
     dice <- sample(c(0,1,2,3),1)
-    
   }
-  
   return(dice)
-  
 }
 
+#fonction pour gérer la case 3
 handle_three <- function(dice){
   
   newposition <- NULL
-  
   random <- sample(c(1,2),1)
   
   if (random==1 && dice > 0 ){
-    
     newposition <- 3 + dice
   }
-  
   else if (random == 2 && dice > 0){
-    
     newposition <- 11 + (dice-1)
   }
-  
   else{ 
-    
     newposition = 3
   }
-  
   return(newposition)
-  
 }
 
+#fonction pour gérer l'activation des pièges
 activate_trap <- function (position) {
   
   random <- sample(c(1,2),1)
@@ -68,9 +57,7 @@ activate_trap <- function (position) {
   if (random == 2){
     trap <- FALSE
   }
-  
   return(trap)
-  
 }
 
 #---------------MATRIce DE TRANSITION , rule 1 (win as soon as you have passed the arrival square)------------------------------ 
@@ -192,9 +179,6 @@ p_risk2 <-rbind(
   c(1/4,1/4,0,0,0,0,0,0,0,0,0,0,0,1/4,1/4),
   c(0,0,0,0,0,0,0,0,0,0,0,0,0,0,1))
 
-
-
-
 #---------------ALGORITHME D'ITERATION DE LA VALEUR------------------------
 # Vecteur coût de depart
 C <-c(1,1,1,1,1,1,1,1,1,1,1,1,1,1,0)
@@ -203,7 +187,6 @@ C <-c(1,1,1,1,1,1,1,1,1,1,1,1,1,1,0)
 # c(10,9,8,7,6,5,4,3,2,1,4,3,2,1,0)
 # c(1,1,1,1,1,1,1,1,1,1,1,1,1,1,0)
 # c(20,18,16,14,12,10,8,6,4,1,8,6,4,1,0)
-
 
 v_iter=function(S,N,R,C) {
   V<- C
@@ -272,23 +255,18 @@ for (k in c(1,2)){#circle game ou non
 
     if (Rule == 2){
       policy = rule2[[j]]}
-
-    vector_step=c()
     
+    vector_step=c()
 for (i in 1 : 10000){
-  
   step = 1
   position = 1
   end=FALSE
   
   while (end == FALSE) {
-    
     if (policy[position] == 1) {
       dice<- roll_dice(1)
-      
       if (position  == 3){
         position <- handle_three(dice)
-        
       }
       else if (position == 10 && dice == 1){
         position <- 15
@@ -300,10 +278,8 @@ for (i in 1 : 10000){
     }
     else if (policy[position] == 2){
       dice <- roll_dice(2)
-      
       if(position == 3){
         position <- handle_three(dice)
-        
       }
       else if (position == 9 && dice == 2 ){
         position <- 15
@@ -311,10 +287,8 @@ for (i in 1 : 10000){
       else if (position == 10 && dice >0){
         position <-15 +(dice-1)
       }
-      
       else {
         position <- position + dice
-  
         if( position == 7 && activate_trap()){
           
           position = 4
