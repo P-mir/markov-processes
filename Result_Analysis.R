@@ -26,7 +26,7 @@ colnames(result_matrix_rule2) <- c("Optimal policy","Dice 1","Dice 2", "Dice 3",
 # simulation des jeux pour la règle 1
 for(i in 1 : 5){
   for ( j in 1 : 14){
-    result_matrix_rule1[j,i] <- mean(simulation_game(1,policy_list[[i]],j))
+    result_matrix_rule1[j,i] <- mean(simulation_game(1,policy_list_rule1[[i]],j))
   }
 }
 write.table(result_matrix_rule1,"result_matrix_rule1.txt")
@@ -34,7 +34,7 @@ write.table(result_matrix_rule1,"result_matrix_rule1.txt")
 # simulation des jeux pour la règle 2
 for(i in 1 : 5){
   for ( j in 1 : 14){
-    result_matrix_rule2[j,i] <- mean(simulation_game(2,policy_list[[i]],j))
+    result_matrix_rule2[j,i] <- mean(simulation_game(2,policy_list_rule2[[i]],j))
   }
 }
 write.table(result_matrix_rule2,"result_matrix_rule2.txt")
