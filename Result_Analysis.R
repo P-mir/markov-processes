@@ -8,8 +8,8 @@ source('simulation_game.R')
 
 #---------Création des stratégies et matrice de résultats-------------------
 
-opt_policy_rule1 <- v_iter(p_secure1,p_normal1,p_risk1,C)[[1]]
-opt_policy_rule2 <- v_iter(p_secure2,p_normal2,p_risk2,C)[[1]]
+opt_policy_rule1 <- v_iter(p_secure1,p_normal1,p_risk1,Cost)[[1]]
+opt_policy_rule2 <- v_iter(p_secure2,p_normal2,p_risk2,Cost)[[1]]
 always_dice1 <- c(rep(1,15))
 always_dice2 <- c(rep(2,15))
 always_dice3 <- c(rep(3,15))

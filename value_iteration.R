@@ -1,9 +1,10 @@
 #---------------ALGORITHME D'ITERATION DE LA VALEUR------------------------
 # Vecteur coût de depart
-C <-c(1,1,1,1,1,1,1,1,1,1,1,1,1,1,0)
-C_prison <-c(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0)
+Cost <-c(1,1,1,1,1,1,1,1,1,1,1,1,1,1,0)
+Cost_prison <-c(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0)
 
 v_iter=function(S,N,R,cost) {
+  C<- cost
   V<- cost
   a<-c(rep(0,length(cost)))
   for( t  in 1 : 1000){
