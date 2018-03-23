@@ -1,6 +1,6 @@
 #---------------ALGORITHME D'ITERATION DE LA VALEUR------------------------
 # Vecteur coût de depart
-C <-c(1,1,1,1,1,1,1,1,1,1,1,1,1,1,0)
+C <-c(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0)
 
 v_iter=function(S,N,R,C) {
   V<- C
