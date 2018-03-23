@@ -4,9 +4,9 @@ C <-c(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0)
 
 v_iter=function(S,N,R,C) {
   V<- C
-  a<-c(rep(0,15))
+  a<-c(rep(0,16))
   for( t  in 1 : 1000){
-    for (i in 1 : 15 ){
+    for (i in 1 : 16 ){
       secure <- C[i]+S[i,]%*%V
       normal <- C[i]+N[i,]%*%V
       risk   <- C[i]+R[i,]%*%V
