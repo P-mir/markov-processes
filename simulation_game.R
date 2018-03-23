@@ -37,6 +37,24 @@ handle_three <- function(dice){
     newposition <- 3 + dice
   }
   else if (random == 2 && dice > 0){
+    newposition <- 11 + (dice-1)
+  }
+  else{ 
+    newposition = 3
+  }
+  return(newposition)
+}
+
+#fonctino pour gérer la case 3 avec la prison 
+handle_three_prison <- function(dice){
+  
+  newposition <- NULL
+  random <- sample(c(1,2),1)
+  
+  if (random==1 && dice > 0 ){
+    newposition <- 3 + dice
+  }
+  else if (random == 2 && dice > 0){
     newposition <- 12 + (dice-1)
   }
   else{ 
@@ -78,7 +96,7 @@ simulation_game_prison<-function(R,S,P) {
       if (policy[position] == 1) {
         dice<- roll_dice(1)
         if (position  == 3){
-          position <- handle_three(dice)
+          position <- handle_three_prison(dice)
         }
         else if (position == 11 && dice == 1){
           position <- 16
@@ -91,7 +109,7 @@ simulation_game_prison<-function(R,S,P) {
       else if (policy[position] == 2){
         dice <- roll_dice(2)
         if(position == 3){
-          position <- handle_three(dice)
+          position <- handle_three_prison(dice)
         }
         else if (position == 9 && dice == 2 && activate_trap()==FALSE ){
           position <- 16
@@ -121,7 +139,7 @@ simulation_game_prison<-function(R,S,P) {
         dice <- roll_dice(3)
         
         if (position == 3){
-          position <- handle_three(dice)
+          position <- handle_three_prison(dice)
         }
         else if (position == 10 && dice >= 2){
           position = 16 + dice -2
@@ -157,7 +175,6 @@ simulation_game_prison<-function(R,S,P) {
       }
     }
   }
-  
   return(vector_step)
 }
 
@@ -257,6 +274,5 @@ simulation_game<-function(R,S,P) {
     }
     
   }
-  
   return(vector_step)
 }

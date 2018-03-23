@@ -31,7 +31,7 @@ for(i in 1 : 5){
     result_matrix_rule1_prison[j,i] <- mean(simulation_game_prison(1,policy_list_rule1[[i]],j))
   }
 }
-write.table(result_matrix_rule1,"result_matrix_rule1.txt")
+write.table(result_matrix_rule1_prison,"result_matrix_rule1_prison.txt")
 
 # simulation des jeux pour la règle 2
 for(i in 1 : 5){
@@ -39,7 +39,7 @@ for(i in 1 : 5){
     result_matrix_rule2_prison[j,i] <- mean(simulation_game_prison(2,policy_list_rule2[[i]],j))
   }
 }
-write.table(result_matrix_rule2,"result_matrix_rule2.txt")
+write.table(result_matrix_rule2_prison,"result_matrix_rule2_prison.txt")
 
 #---------Relire les tables de résultats--------------------------------------
 

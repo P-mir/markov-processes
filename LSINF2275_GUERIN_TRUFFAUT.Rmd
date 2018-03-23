@@ -23,17 +23,17 @@ knitr::opts_chunk$set(comment = "")
 ```
 
 
-# 1. Introduction et explication du jeu
+# 1. Introduction et explication du jeu (Guillaume)
 
-# 2. Théorie : algorithme d'itération de la valeur
+# 2. Théorie : algorithme d'itération de la valeur (Patrick)
 
-# 3. Simulation du jeu 
+# 3. Simulation du jeu (Guillaume)
 
 # 4. Adaptation du jeu
 
-# 4.1 Ajout d'une prison
+# 4.1 Ajout d'une prison (Patrick)
 
-# 4.2 Adaptation de la pénalité d'une case
+# 4.2 Adaptation de la pénalité d'une case (cost sensitive ?)
 
 # 5. Conclusion
 
