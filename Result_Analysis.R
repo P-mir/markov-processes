@@ -1,6 +1,6 @@
 #File path
-#setwd("~/GitHub/markov-processes")
-setwd("C:/Users/p/Documents/GitHub/markov-processes")
+setwd("~/GitHub/markov-processes")
+#setwd("C:/Users/p/Documents/GitHub/markov-processes")
 
 source('transition_matrix.R')
 source('value_iteration.R')
@@ -24,6 +24,7 @@ colnames(result_matrix_rule1) <- c("Optimal policy","Dice 1","Dice 2", "Dice 3",
 colnames(result_matrix_rule2) <- c("Optimal policy","Dice 1","Dice 2", "Dice 3", "Random dice")
 
 #---------Simulation des jeux à partir de toutes les cases-------------------
+
 # simulation des jeux pour la règle 1
 for(i in 1 : 5){
   for ( j in 1 : 14){
@@ -40,8 +41,14 @@ for(i in 1 : 5){
 }
 write.table(result_matrix_rule2,"result_matrix_rule2.txt")
 
+#---------Relire les tables de résultats--------------------------------------
+
+result_matrix_rule1 <- read.table("result_matrix_rule1.txt")
+result_matrix_rule2 <- read.table("result_matrix_rule2.txt")
+
 #---------Resultats à partir de la case 1 : Boxplots-Règle 1------------------------
 
+windows()
 par(mfrow=c(1,5))
 for( i in 1 : 5){
   boxplot(simulation_game(1,policy_list_rule1[[1]],1),main=colnames(result_matrix_rule1)[i],ylab=c(0,250))
@@ -49,6 +56,7 @@ for( i in 1 : 5){
 
 #---------Resultats à partir de la case 1 : Boxplots-Règle 2------------------------
 
+windows()
 par(mfrow=c(1,5))
 for( i in 1 : 5){
   boxplot(simulation_game(2,policy_list_rule2[[1]],1),main=colnames(result_matrix_rule2)[i],ylab=c(0,250))

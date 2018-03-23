@@ -72,7 +72,7 @@ simulation_game<-function(R,S,P) {
   vector_step=c()
   
   for (i in 1 : 10000){
-    step = 1
+    step = 0
     position = start
     end=FALSE
     

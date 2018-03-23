@@ -29,7 +29,11 @@ knitr::opts_chunk$set(comment = "")
 
 # 3. Simulation du jeu 
 
-# 4. Adaptation du jeu : ajout d'une case prison
+# 4. Adaptation du jeu
+
+# 4.1 Ajout d'une prison
+
+# 4.2 Adaptation de la pénalité d'une case
 
 # 5. Conclusion
 
