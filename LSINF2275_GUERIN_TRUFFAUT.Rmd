@@ -23,5 +23,13 @@ knitr::opts_chunk$set(comment = "")
 ```
 
 
+# 1. Introduction et explication du jeu
 
+# 2. Théorie : algorithme d'itération de la valeur
+
+# 3. Simulation du jeu 
+
+# 4. Adaptation du jeu : ajout d'une case prison
+
+# 5. Conclusion
 
