@@ -101,6 +101,9 @@ simulation_game_prison<-function(R,S,P) {
         else if (position == 11 && dice == 1){
           position <- 16
         }
+        else if (position ==9 && dice == 1){
+          position <- 11
+        }
         else {
           position <- position + dice
         }
@@ -121,7 +124,7 @@ simulation_game_prison<-function(R,S,P) {
           position <- 16
         }
         else if (position == 11 && dice >0){
-          position <-16 +(dice-1)
+          position <- 16+(dice-1)
         }
         else {
           position <- position + dice
@@ -129,7 +132,7 @@ simulation_game_prison<-function(R,S,P) {
             
             position = 4
           }
-          else if (position == 13 && activate_trap()){
+          else if (position == 14 && activate_trap()){
             position = 1
           }
         }
@@ -140,6 +143,9 @@ simulation_game_prison<-function(R,S,P) {
         
         if (position == 3){
           position <- handle_three_prison(dice)
+        }
+        else if (position == 9 && dice == 3){
+          position = 16
         }
         else if (position == 10 && dice >= 2){
           position = 16 + dice -2
@@ -154,7 +160,7 @@ simulation_game_prison<-function(R,S,P) {
           if (position == 7){
             position = 4
           }
-          else if(position ==13){
+          else if(position ==14){
             position =1
           }
         }

@@ -1,6 +1,6 @@
 #File path
-setwd("~/GitHub/markov-processes")
-#setwd("C:/Users/p/Documents/GitHub/markov-processes")
+#setwd("~/GitHub/markov-processes")
+setwd("C:/Users/p/Documents/GitHub/markov-processes")
 
 source('transition_matrix.R')
 source('value_iteration.R')
@@ -62,4 +62,5 @@ for( i in 1 : 5){
   boxplot(simulation_game_prison(2,policy_list_rule2[[1]],1),main=colnames(result_matrix_rule2_prison)[i],ylab=c(0,250))
   
 }
+
 
