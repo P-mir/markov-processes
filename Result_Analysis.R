@@ -8,7 +8,7 @@ source('simulation_game.R')
 
 #---------Création des stratégies et matrice de résultats-------------------
 
-opt_policy_rule1 <- v_iter(p_secure1,p_normal1,p_risk1,Cost)[[2]]
+opt_policy_rule1 <- v_iter(p_secure1,p_normal1,p_risk1,Cost)[[1]]
 opt_policy_rule2 <- v_iter(p_secure2,p_normal2,p_risk2,Cost)[[1]]
 always_dice1 <- c(rep(1,15))
 always_dice2 <- c(rep(2,15))
@@ -49,23 +49,36 @@ result_matrix_rule2 <- read.table("result_matrix_rule2.txt")
 #---------Resultats à partir de la case 1 : Boxplots-Règle 1------------------------
 
 windows()
-par(mfrow=c(1,5),oma=c(0,0,4,0))
+par(mfrow=c(1,5),oma=c(0,0,0,0))
 for( i in 1 : 5){
-  boxplot(simulation_game(1,policy_list_rule1[[i]],1),main=colnames(result_matrix_rule1)[i],ylim=c(0,50))
+  boxplot(simulation_game(1,policy_list_rule1[[i]],1),main=colnames(result_matrix_rule1)[i],ylim=c(0,50),cex.main=1.8)
 }
-mtext(outer=TRUE,text="Boxplots - Règle 1")
 
 #---------Resultats à partir de la case 1 : Boxplots-Règle 2------------------------
 
 windows()
 par(mfrow=c(1,5))
-par(mfrow=c(1,5),oma=c(0,0,4,0))
+par(mfrow=c(1,5),oma=c(0,0,0,0))
 for( i in 1 : 5){
-  boxplot(simulation_game(2,policy_list_rule2[[i]],1),main=colnames(result_matrix_rule2)[i],ylim=c(0,100))
-  mtext(outer=TRUE,text="Boxplots - Règle 2")
+  boxplot(simulation_game(2,policy_list_rule2[[i]],1),main=colnames(result_matrix_rule2)[i],ylim=c(0,120),cex.main=1.8)
 }
 
-#--------Analyse de la variance--------------------------
+#--------Comparaison des ecart-type--------------------------
 
-variance_matrix()
+variance_matrix_rule1<-matrix(ncol=5,nrow=1)
+colnames(variance_matrix_rule1) <- c("Optimal policy","Dice 1","Dice 2", "Dice 3", "Random dice")
+rownames(variance_matrix_rule1)<- c("Ecart-type")
+variance_matrix_rule2<-variance_matrix_rule1
+
+for( i in 1 : 5){
+  
+  variance_matrix_rule1[1,i]<-sd(simulation_game(1,policy_list_rule1[[i]],1))
+  variance_matrix_rule2[1,i]<-sd(simulation_game(2,policy_list_rule2[[i]],1))
+  
+}
+
+write.table(variance_matrix_rule1,"variance_matrix_rule1.txt")
+write.table(variance_matrix_rule2,"variance_matrix_rule2.txt")
+
+
 
