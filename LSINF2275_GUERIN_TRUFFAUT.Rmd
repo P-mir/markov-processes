@@ -11,6 +11,8 @@ knitr::opts_chunk$set(comment = "")
 ```{r child='LSINF2275-Frontpage.RMD'}
 ```
 
+\graphicspath{ {(C:/Users/Guillaume/Documents/GitHub/markov-processes/} }
+
 \newpage
 
 '\tableofcontents'
@@ -24,6 +26,18 @@ knitr::opts_chunk$set(comment = "")
 
 
 # 1. Introduction et explication du jeu (Guillaume)
+
+L'objectif du projet est de mettre en application les processus de décision markovien sur un jeu de l'oie modifié. Ce dernier est modélisé de la manière suivante : 
+
+
+\begin{figure}[h]
+\caption{Schéma du jeu de l'oie modifié}
+\includegraphics{jeu de l'oie.PNG}
+\centering
+\end{figure}
+
+Pour commencer, nous avons initialisé le jeu avec deux pièges. Le premier est situé sur la case 7 et le second sur la case 13. Le premier s'il s'active fait reculer le joueur de 3 cases jusqu'à la case 4. Le second piège, quant à lui, ramène le joueur à la case 1. Il est important de préciser que le piège a une chance de s'activer dès que le joueur arrive sur la case. Exemple : Le joueur démarre de la case 5 et réalise un 2 en jouant le dé normal, il arrive donc sur la case 7. Le piège s'active avec une probabilité de 50% 
+
 
 # 2. Théorie : algorithme d'itération de la valeur (Patrick)
 

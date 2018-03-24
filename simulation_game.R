@@ -37,6 +37,7 @@ handle_three <- function(dice){
     newposition <- 3 + dice
   }
   else if (random == 2 && dice > 0){
+    
     newposition <- 11 + (dice-1)
   }
   else{ 
@@ -239,10 +240,14 @@ simulation_game<-function(R,S,P) {
         
         if (position == 3){
           position <- handle_three(dice)
+          
+          if (position == 13){ #ce point la n'a pas été géré
+            position <- 1
+          }
         }
         
         else if (position == 8 && dice ==3){
-          position == 15
+          position = 15
         }
         else if (position == 9 && dice>=2){
           position = 15 + dice -2
@@ -258,7 +263,7 @@ simulation_game<-function(R,S,P) {
             position = 4
             
           }
-          if(position ==13){
+          else if(position ==13){
             position =1
           }
         }

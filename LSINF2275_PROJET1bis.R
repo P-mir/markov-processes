@@ -307,7 +307,7 @@ for (i in 1 : 10000){
       }
       
       else if (position == 8 && dice ==3){
-        position == 15
+        position = 15
       }
       else if (position == 9 && dice>=2){
         position = 15 + dice -2
