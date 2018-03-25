@@ -147,6 +147,9 @@ simulation_game_prison<-function(R,S,P) {
         
         if (position == 3){
           position <- handle_three_prison(dice)
+          if (position == 13){ #ce point la n'a pas été géré
+            position <- 1
+          }
         }
         else if (position == 7 && dice == 3){
           position = 11
