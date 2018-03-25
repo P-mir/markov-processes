@@ -1,6 +1,6 @@
 #File path
-setwd("~/GitHub/markov-processes")
-#setwd("C:/Users/p/Documents/GitHub/markov-processes")
+#setwd("~/GitHub/markov-processes")
+setwd("C:/Users/p/Documents/GitHub/markov-processes")
 
 source('transition_matrix.R')
 source('value_iteration.R')
@@ -47,20 +47,20 @@ result_matrix_rule1_prison <- read.table("result_matrix_rule1_prison.txt")
 result_matrix_rule2_prison <- read.table("result_matrix_rule2_prison.txt")
 
 #---------Resultats à partir de la case 1 : Boxplots-Règle 1------------------------
-
-windows()
-par(mfrow=c(1,5))
-for( i in 1 : 5){
-  boxplot(simulation_game_prison(1,policy_list_rule1[[1]],1),main=colnames(result_matrix_rule1_prison)[i],ylab=c(0,250))
-}
-
-#---------Resultats à partir de la case 1 : Boxplots-Règle 2------------------------
-
-windows()
-par(mfrow=c(1,5))
-for( i in 1 : 5){
-  boxplot(simulation_game_prison(2,policy_list_rule2[[1]],1),main=colnames(result_matrix_rule2_prison)[i],ylab=c(0,250))
-  
-}
+# 
+# windows()
+# par(mfrow=c(1,5))
+# for( i in 1 : 5){
+#   boxplot(simulation_game_prison(1,policy_list_rule1[[1]],1),main=colnames(result_matrix_rule1_prison)[i],ylab=c(0,250))
+# }
+# 
+# #---------Resultats à partir de la case 1 : Boxplots-Règle 2------------------------
+# 
+# windows()
+# par(mfrow=c(1,5))
+# for( i in 1 : 5){
+#   boxplot(simulation_game_prison(2,policy_list_rule2[[1]],1),main=colnames(result_matrix_rule2_prison)[i],ylab=c(0,250))
+#   
+# }
 
 

@@ -46,7 +46,7 @@ handle_three <- function(dice){
   return(newposition)
 }
 
-#fonctino pour gérer la case 3 avec la prison 
+#fonction pour gérer la case 3 avec la prison 
 handle_three_prison <- function(dice){
   
   newposition <- NULL
@@ -115,6 +115,9 @@ simulation_game_prison<-function(R,S,P) {
         if(position == 3){
           position <- handle_three_prison(dice)
         }
+        else if (position == 8 && dice == 2){
+          position <- 11
+        }
         else if (position == 9 && dice == 2 && activate_trap()==FALSE ){
           position <- 16
         }
@@ -144,6 +147,15 @@ simulation_game_prison<-function(R,S,P) {
         
         if (position == 3){
           position <- handle_three_prison(dice)
+        }
+        else if (position == 7 && dice == 3){
+          position = 11
+        }
+        else if (position == 8 && dice == 2){
+          position = 11
+        }
+        else if (position == 8 && dice == 3){
+          position = 16
         }
         else if (position == 9 && dice == 3){
           position = 16
