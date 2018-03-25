@@ -45,9 +45,40 @@ Pour commencer, nous avons initialisé le jeu avec deux pièges. Le premier est si
 
 Ensuite, le jeu sera joué selon deux règles différentes. La première règle stipule que le joueur gagne le jeu dès qu'il (dé)passe la case 15. La seconde règle qui est plus stricte exige à ce que le joueur arrive exactement sur la case 15 pour gagner le jeu. 
 
-Pour la suite du projet, nous allons tout d'abord définir la stratégie optimale à jouer selon la règle en vigueur (règle 1 ou règle 2) grâce aux processus de decision markovien. Ensuite nous simulerons différentes parties afin de, tout d'abord, comparer les résultats théoriques et empiriques de la stratégie optimale mais également de comparer cette dernière avec d'autres stratégies qui seront normalement moins efficaces (jouer toujours le même dé ou jouer aléatoirement). 
+Pour la suite du projet, nous allons tout d'abord définir la stratégie optimale à jouer selon la règle en vigueur (règle 1 ou règle 2) grâce aux processus de decision markoviens. Ensuite nous simulerons différentes parties afin de, tout d'abord, comparer les résultats théoriques et empiriques de la stratégie optimale mais également de comparer cette dernière avec d'autres stratégies qui seront normalement moins efficaces (jouer toujours le même dé ou jouer aléatoirement). 
 
-# 2. Théorie : algorithme d'itération de la valeur (Patrick)
+
+# 2. Théorie : algorithme d'itération de la valeur
+
+Afin de trouver la stratégie optimale à jouer nous nous basons sur la méthode de programmation dynamique de Richard Bellman. Le problème est divisé en sous-problèmes: trouver la stratégie optimale pour chaque case.
+
+Ce jeu peut être vu comme un processus stochastique pour lequel le futur est independant du passé, étant donné le présent. (propriété de Markov)
+
+Autrement dit si $X_{n}$ est la stratégie du joueur à la case n et $X_{n-1}$ la stratégie jouée à la case précédant n, on a alors:
+
+$\mathbb{P}(X_n=x_n\mid X_{n-1}=x_{n-1}, \dots, X_0=x_0)=\mathbb{P}(X_n=x_n\mid X_{n-1}=x_{n-1}).$
+  
+  
+
+Une "politique" de jeu optimale peut ainsi être trouvée à l'aide de l'algorithme de la "value iteration". Ce dernier se base sur l'équation de Bellman pour calculer de manière récursive le coût optimal esperé:
+
+
+\[ \hat{V}(k) \leftarrow  \min_{a \in U_{k}} \bigg\{ c(a,k)+ \sum_{k'} p(k'|k,a) V^*(k')]\bigg\} \\ \hat{V}(d) \leftarrow0 , \text{où d est la case finale.}  \]
+  
+Avec :
+
+$\hat{V}(k)$ le coût attendu de la case k. 
+  
+$p(k'|k,a)$ la probabilité d'atteindre la case $k'$ en jouant l'action $a$ depuis la case $k$.
+  
+$c(a,k)$ le coût de realisation de l'action a à la case k, ici 1 à chaque fois.
+
+
+L'action optimale a la case k est alors:
+
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+\[ \argmin_{a \in U_{k}} \bigg\{ c(a,k)+ \sum_{k'} p(k'|k,a) V^*(k')]\bigg\} \]
+
 
 # 3. Simulation du jeu
 
