@@ -1,6 +1,8 @@
 ---
-output: pdf_document
-lang : fr-FR
+lang: fr-FR
+output:
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
@@ -12,6 +14,7 @@ knitr::opts_chunk$set(comment = "")
 ```
 
 \graphicspath{ {(C:/Users/Guillaume/Documents/GitHub/markov-processes/} }
+<!-- \graphicspath{ {(C:/Users/p/Documents/GitHub/markov-processes/} } -->
 
 \newpage
 
@@ -22,6 +25,7 @@ knitr::opts_chunk$set(comment = "")
 ```{r,include=F}
 #---------CHARGEMENT DES SCRIPTS---------------------------------------------
 setwd("~/GitHub/markov-processes")
+# setwd("C:/Users/p/Documents/GitHub/markov-processes")
 source('transition_matrix.R')
 source('value_iteration.R')
 source('simulation_game.R')
@@ -159,7 +163,37 @@ En plus de présenter le meilleur résultat moyen, la stratégie optimale est celle
 
 # 4. Adaptation du jeu
 
-# 4.1 Ajout d'une prison (Patrick)
+# 4.1 Ajout d'un ralentisseur (Patrick)
+
+Nous avons ensuite ajouté un piège en case 9 qui ralentit le joueur si elle est activée. Par exemple si le joueur arrive en case 9 et active le piège, il avancera au tour suivant selon le chiffre tiré par son dé, moins une case. Comme illustré ci-dessous, conceptuellement cela revient à ajouter une case à notre jeu pour porter le nombre de cases à 16.
+
+Voici les résultats, pour le cas de la règle 1 puis pour le cas de la règle 2.
+
+## 4.1.1 Simulation selon la règle 2
+```{r,include=T,echo=F}
+result_matrix_rule1_prison <- read.table("result_matrix_rule1_prison.txt")
+colnames(result_matrix_rule1_prison) <- c("Optimal policy","Dice 1","Dice 2", "Dice 3", "Random dice")
+rownames(result_matrix_rule1_prison)<- c("Square 1","Square 2","Square 3","Square 4","Square 5","Square 6","Square 7","Square 8","Square 9","Square 10","Square 11","Square 12","Square 13","Square 14","Square 15")
+
+kable(round(result_matrix_rule1_prison,2),caption="Nombre d'itérations moyen en fonction de la case de départ")
+```
+
+
+## 4.1.2 Simulation selon la règle 2
+
+```{r,include=T,echo=F}
+result_matrix_rule2_prison <- read.table("result_matrix_rule2_prison.txt")
+colnames(result_matrix_rule2_prison) <- c("Optimal policy","Dice 1","Dice 2", "Dice 3", "Random dice")
+rownames(result_matrix_rule2_prison)<- c("Square 1","Square 2","Square 3","Square 4","Square 5","Square 6","Square 7","Square 8","Square 9","Square 10","Square 11","Square 12","Square 13","Square 14","Square 15")
+
+kable(round(result_matrix_rule2_prison,2),caption="Nombre d'itérations moyen en fonction de la case de départ")
+```
+
+
+
+
+\includegraphics[height=10cm]{jeu de l'oie modifié.png}
+
 
 # 4.2 Adaptation de la pénalité d'une case (cost sensitive ?)
 
