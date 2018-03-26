@@ -64,7 +64,7 @@ $\mathbb{P}(X_n=x_n\mid X_{n-1}=x_{n-1}, \dots, X_0=x_0)=\mathbb{P}(X_n=x_n\mid 
   
   
 
-Une "politique" de jeu optimale peut ainsi être trouvée à l'aide de l'algorithme de la "value iteration". Ce dernier se base sur l'équation de Bellman pour calculer de manière récursive le coût optimal esperé:
+Pour résoudre ce processus de décision markovien, une "politique" de jeu optimale peut ainsi être trouvée à l'aide de l'algorithme de la "value iteration". Ce dernier se base sur l'équation de Bellman pour calculer de manière récursive le coût optimal esperé:
 
 
 \[ \hat{V}(k) \leftarrow  \min_{a \in U_{k}} \bigg\{ c(a,k)+ \sum_{k'} p(k'|k,a) V^*(k')]\bigg\} \\ \hat{V}(d) \leftarrow0 , \text{où d est la case finale.}  \]
