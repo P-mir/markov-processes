@@ -1,6 +1,6 @@
 #File path
-setwd("~/GitHub/markov-processes")
-#setwd("C:/Users/p/Documents/GitHub/markov-processes")
+# setwd("~/GitHub/markov-processes")
+setwd("C:/Users/p/Documents/GitHub/markov-processes")
 
 source('transition_matrix.R')
 source('value_iteration.R')

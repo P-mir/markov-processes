@@ -7,6 +7,7 @@ v_iter=function(S,N,R,cost) {
   C<- cost
   V<- cost
   a<-c(rep(0,length(cost)))
+
   for( t  in 1 : 1000){
     for (i in 1 : length(cost) ){
       secure <- C[i]+S[i,]%*%V

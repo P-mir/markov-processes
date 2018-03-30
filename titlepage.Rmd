@@ -1,0 +1,47 @@
+
+\begin{titlepage}
+  \begin{sffamily}
+  \begin{center}
+
+    \newcommand{\titreP}{Snake and Ladders game}
+    \newcommand{\titreS}{Projet 1 - Markov Decision Processes}
+    
+    \includegraphics[scale=0.5]{EPLlogo.jpg}~\\[0.25cm]
+    \textsc{\LARGE Ecole polytechnique de Louvain}\\[2cm]
+
+    \textsc{\huge LSINF2275\\ Data Mining \& \\Decision Making}\\[1.5cm]
+
+    % Title
+    \HRule \\
+    [0.4cm]
+    {\huge \bfseries \titreP \\ \titreS \\
+    [0.4cm] }
+    \HRule \\
+    [0.5cm]
+    \begin{center}
+            \includegraphics[scale=0.6]{snake_and_ladders.jpg}
+    \end{center}
+
+    % Author and supervisor
+    \begin{minipage}{0.5\textwidth}
+      \begin{flushleft} \large
+        Guillaume  \textsc{TRUFFAUT } - noma - DATS2M\\ 
+        Patrick \textsc{GUERIN} - 80541700 - DATS2M\\ 
+     
+       
+      \end{flushleft}
+    \end{minipage}
+    \begin{minipage}{0.4\textwidth}
+      \begin{flushright} \large
+        Professeur :  Marco  \textsc{Saerens}\\
+        \end{flushright}
+    \end{minipage}
+
+    \vfill
+
+    % Bottom of the page
+    {\today}
+
+  \end{center}
+  \end{sffamily}
+\end{titlepage}
