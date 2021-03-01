@@ -1,4 +1,4 @@
-%Solving a variation of the snake and ladder game with dynamic programming
+# Solving a variation of the snake and ladder game with dynamic programming
 
 In this variation, the player is given the possibility to choose between 3 dices at each turn,
  and can therefore develop a strategy to win the game (see projectMDP01English.pdf for details)
